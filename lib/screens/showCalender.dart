@@ -22,7 +22,6 @@ class CalenderPage extends StatefulWidget {
 
 class _CalenderPageState extends State<CalenderPage> {
   CalendarFormat _calendarFormat = CalendarFormat.month;
-  DateTime _selectedDay = DateTime.now();
   Map<DateTime, List<Holiday>> _holidays = {};
 
   @override
@@ -83,14 +82,7 @@ class _CalenderPageState extends State<CalenderPage> {
   }
 
   void showSnacks() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Something Wrong With Request-Try Again'),
-        duration: Duration(seconds: 1),
-      ),
-    );
-
-    Navigator.of(context).pop();
+     Navigator.of(context).pop();
   }
 
   @override
@@ -110,9 +102,9 @@ class _CalenderPageState extends State<CalenderPage> {
               Color.fromARGB(255, 240, 237, 248),
             ])),
         child: TableCalendar(
-          firstDay: DateTime.utc(2023, 1, 1),
-          lastDay: DateTime.utc(2023, 12, 31),
-          focusedDay: _selectedDay,
+          firstDay: DateTime.parse(widget.startDate),
+          lastDay: DateTime.parse(widget.endDate),
+          focusedDay: DateTime.parse(widget.startDate),
           calendarFormat: _calendarFormat,
           holidayPredicate: (day) {
             // Weekends
@@ -123,11 +115,6 @@ class _CalenderPageState extends State<CalenderPage> {
             // Weekends
             // final dayTime = DateTime( day.year, day.month, day.day);
             return isHoliday;
-          },
-          onDaySelected: (selectedDay, focusedDay) {
-            setState(() {
-              _selectedDay = selectedDay;
-            });
           },
           calendarStyle: const CalendarStyle(
             holidayTextStyle: TextStyle(color: Colors.red),

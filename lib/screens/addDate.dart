@@ -64,13 +64,14 @@ class _DateAdderState extends State<DateAdder> {
                     children: [
                       TextFormField(
                         decoration: const InputDecoration(
-                          labelText: 'Start Date : YY/MM/DD',
+                          labelText: 'Start Date : e.g 2022-01-01',
                         ),
                         keyboardType: TextInputType.datetime,
                         validator: (value) {
                           if (value == null ||
                               value.trim().isEmpty ||
-                              value.isEmpty) {
+                              value.isEmpty ||
+                              DateTime.tryParse(value) == null) {
                             return 'Invalid Format';
                           }
                           return null;
@@ -81,13 +82,13 @@ class _DateAdderState extends State<DateAdder> {
                       ),
                       TextFormField(
                         decoration: const InputDecoration(
-                          labelText: 'End Date :   YY/MM/DD',
+                          labelText: 'End Date : e.g 2023-03-01',
                         ),
                         keyboardType: TextInputType.datetime,
                         validator: (value) {
                           if (value == null ||
                               value.trim().isEmpty ||
-                              value.isEmpty) {
+                              value.isEmpty || DateTime.tryParse(value) == null) {
                             return 'Invalid Format';
                           }
                           return null;
@@ -98,14 +99,14 @@ class _DateAdderState extends State<DateAdder> {
                       ),
                       TextFormField(
                         decoration: const InputDecoration(
-                          labelText: 'Enter Country e.g US,PK',
+                          labelText: 'Enter Country e.g US,CN,AR',
                         ),
                         keyboardType: TextInputType.datetime,
                         validator: (value) {
                           if (value == null ||
-                              value.trim().length <= 0 ||
-                              value.isEmpty) {
-                            return 'Invalid Format';
+                              value.trim().isEmpty ||
+                              value.isEmpty || value.trim().length!=2) {
+                            return 'Enter Valid Format';
                           }
                           return null;
                         },
