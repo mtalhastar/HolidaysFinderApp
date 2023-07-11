@@ -1,16 +1,12 @@
-# holidaysapp
+Country Holidays App
 
-A new Flutter project.
+This Flutter app integrates with a third-party API from RapidAPI to retrieve country holidays and displays them on a calendar. The app allows users to select a specific country and a date range to view the respective holidays within that range.
 
-## Getting Started
+Features:
+- Integration with RapidAPI to fetch country holiday data
+- Calendar view with selectable date range
+- Display of holidays within the selected date range
+- User-friendly interface with intuitive navigation
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+API Used:
+The app utilizes the country holiday API provided by RapidAPI. This API provides holiday data for various countries and supports filtering by date range.
