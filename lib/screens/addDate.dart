@@ -14,6 +14,8 @@ class _DateAdderState extends State<DateAdder> {
   String startDate = '';
   String endDate = '';
   String country = '';
+  String wage = '';
+  String workingHours = '';
 
   void saveItem() async {
     final validation = _formKey.currentState!.validate();
@@ -23,7 +25,7 @@ class _DateAdderState extends State<DateAdder> {
     _formKey.currentState!.save();
     Navigator.of(context).push(MaterialPageRoute(
         builder: (ctx) => CalenderPage(
-            startDate: startDate, endDate: endDate, country: country)));
+            startDate: startDate, endDate: endDate, country: country ,wage:wage,workingHours:workingHours)));
   }
 
   @override
@@ -88,7 +90,8 @@ class _DateAdderState extends State<DateAdder> {
                         validator: (value) {
                           if (value == null ||
                               value.trim().isEmpty ||
-                              value.isEmpty || DateTime.tryParse(value) == null) {
+                              value.isEmpty ||
+                              DateTime.tryParse(value) == null) {
                             return 'Invalid Format';
                           }
                           return null;
@@ -105,7 +108,8 @@ class _DateAdderState extends State<DateAdder> {
                         validator: (value) {
                           if (value == null ||
                               value.trim().isEmpty ||
-                              value.isEmpty || value.trim().length!=2) {
+                              value.isEmpty ||
+                              value.trim().length != 2) {
                             return 'Enter Valid Format';
                           }
                           return null;
@@ -114,19 +118,60 @@ class _DateAdderState extends State<DateAdder> {
                           country = value!;
                         },
                       ),
+                       Row(
+                        children: [
+                         Expanded(
+                           child: TextFormField(
+                              decoration: const InputDecoration(
+                              labelText: 'Enter Working Hours',
+                            ),
+                            keyboardType: TextInputType.number,
+                            validator: (value) {
+                              if (value == null ||
+                                  value.trim().isEmpty ||
+                                  value.isEmpty 
+                                  ) {
+                                return 'Enter Valid Format';
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              workingHours = value!;
+                            },
+                                                 ),
+                         ),
+                        Expanded(
+                          child: TextFormField(
+                            decoration: const InputDecoration(
+                              labelText: 'Enter Wage Amount',
+                            ),
+                            keyboardType: TextInputType.number,
+                            validator: (value) {
+                              if (value == null ||
+                                  value.trim().isEmpty ||
+                                  value.isEmpty ) {
+                                return 'Enter Valid Format';
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              wage = value!;
+                            },
+                          ),
+                        ),
+                      ]),
                       const SizedBox(
                         height: 10,
                       ),
                       ElevatedButton(
                         onPressed: () {
                           saveItem();
-                          
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor:
                               Theme.of(context).colorScheme.primaryContainer,
                         ),
-                        child: const Text('Find Holidays'),
+                        child: const Text('Find Wage'),
                       ),
                     ],
                   ),
